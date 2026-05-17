@@ -12,7 +12,7 @@ class EventController extends Controller
     /**
      * 5.4.4. Implementasi Read - Menampilkan Daftar Event
      */
-    public function index()
+    public function index(\Illuminate\Http\Request $request)
     {
         $events = Event::with('category')->latest()->paginate(10);
         return view('admin.events.index', compact('events'));
