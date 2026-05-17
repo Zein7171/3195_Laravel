@@ -48,25 +48,35 @@
             <p class="text-slate-500 font-medium">Jangan sampai ketinggalan acara seru minggu ini!</p>
         </div>
             
-        <div class="mb-12 flex flex-wrap gap-4 justify-center">
-            <a href="/" class="px-4 py-2 bg-gray-200 hover:bg-gray-300 rounded-xl text-black transition font-medium">
+<div class="mb-12 flex flex-wrap gap-3 justify-center items-center">
+            
+            <button onclick="window.location.href='{{ url('/#events') }}'" 
+               class="px-5 py-2.5 rounded-full text-sm font-semibold border transition-all duration-300 
+               {{ !request('category') 
+                   ? 'bg-indigo-600 text-white border-indigo-600 shadow-lg shadow-indigo-100 scale-105' 
+                   : 'bg-white text-slate-600 border-slate-200 hover:bg-slate-50 hover:text-indigo-600 hover:border-indigo-600' }}">
                 Semua Kategori
-            </a>
-            @foreach($categories as $cat)
-                <a href="/?category={{ $cat->slug }}" 
-                   class="px-4 py-2 bg-indigo-100 hover:bg-indigo-200 text-indigo-700 rounded-xl shadow-sm transition font-medium">
-                    {{ $cat->name }}
-                </a>
-            @endforeach
-        </div>
+            </button>
 
+            @foreach($categories as $cat)
+                <button onclick="window.location.href='{{ url('/?category=' . $cat->slug . '#events') }}'" 
+                   class="px-5 py-2.5 rounded-full text-sm font-semibold border transition-all duration-300 
+                   {{ request('category') == $cat->slug 
+                       ? 'bg-indigo-600 text-white border-indigo-600 shadow-lg shadow-indigo-100 scale-105' 
+                       : 'bg-white text-slate-600 border-slate-200 hover:bg-indigo-50 hover:text-indigo-600 hover:border-indigo-300' }}">
+                    {{ $cat->name }}
+                </button>
+            @endforeach
+
+        </div>
+        
         <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
             @foreach($events as $event)
                 <div class="group bg-white rounded-3xl border border-slate-100 shadow-sm hover:shadow-2xl transition-all duration-300 overflow-hidden">
                     <div class="relative overflow-hidden aspect-[3/4]">
-                        <img src="{{ asset('assets/' . $event->poster_path) }}" 
-                             alt="{{ $event->title }}" 
-                             class="w-full h-full object-cover group-hover:scale-110 transition-transform duration-500">
+                       <img src="{{ asset('assets/' . $event->poster_path) }}" 
+     alt="{{ $event->title }}" 
+     class="w-full h-full object-cover group-hover:scale-110 transition-transform duration-500">
                         <div class="absolute top-4 left-4 px-3 py-1 bg-white/90 backdrop-blur rounded-lg text-xs font-bold uppercase text-indigo-600">
                             {{ $event->category->name }}
                         </div>
