@@ -14,8 +14,8 @@ class HomeController extends Controller
         $categories = Category::all();
 
         // 2. Buat kueri dasar untuk mengambil event:
-        // - Gunakan Eager loading 'category' supaya ringan
-        // - Hanya tampilkan kegiatan yang belum kedaluwarsa (>= hari ini)
+        // - Gunakan Eager loading `category`
+        // - Hanya tampilkan kegiatan dengan jadwal yang belum kedaluwarsa (>= hari ini)
         $query = Event::with('category')
             ->where('date', '>=', now())
             ->orderBy('date', 'asc');
