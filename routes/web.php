@@ -8,6 +8,9 @@ use App\Http\Controllers\Admin\TransactionController;
 use App\Http\Controllers\Admin\EventController as AdminEventController;
 use App\Http\Controllers\Admin\PartnerController;
 
+// Pastikan ditaruh di dalam group admin yang sudah ada
+Route::get('/admin/partners/create', [PartnerController::class, 'create'])->name('admin.partners.create');
+Route::post('/admin/partners/store', [PartnerController::class, 'store'])->name('admin.partners.store');
 Route::get('/admin/partners', [PartnerController::class, 'index'])->name('admin.partners.index');
 Route::get('/', [HomeController::class, 'index'])->name('home');
 Route::get('/event/1', [EventController::class, 'show'])->name('events.show');
