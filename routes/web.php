@@ -6,7 +6,9 @@ use App\Http\Controllers\Admin\DashboardController;
 use App\Http\Controllers\Admin\CategoryController;
 use App\Http\Controllers\Admin\TransactionController;
 use App\Http\Controllers\Admin\EventController as AdminEventController;
+use App\Http\Controllers\Admin\PartnerController;
 
+Route::get('/admin/partners', [PartnerController::class, 'index'])->name('admin.partners.index');
 Route::get('/', [HomeController::class, 'index'])->name('home');
 Route::get('/event/1', [EventController::class, 'show'])->name('events.show');
 Route::get('/checkout', [EventController::class, 'checkout'])->name('checkout');
