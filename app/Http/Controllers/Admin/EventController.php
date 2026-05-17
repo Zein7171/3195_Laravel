@@ -88,4 +88,13 @@ class EventController extends Controller
         return redirect()->route('admin.events.index')
                          ->with('success', 'Data event berhasil dihapus secara permanen.');
     }
+
+    public function show($id)
+    {
+    // Mengambil data event berdasarkan ID, jika tidak ada langsung memunculkan 404
+    $event = Event::findOrFail($id); 
+    
+    // Mengembalikan view detail event (pastikan file view ini sudah kamu buat)
+    return view('event-detail', compact('event')); 
+    }
 }

@@ -16,6 +16,7 @@ Route::get('/', [HomeController::class, 'index'])->name('home');
 Route::get('/event/1', [EventController::class, 'show'])->name('events.show');
 Route::get('/checkout', [EventController::class, 'checkout'])->name('checkout');
 Route::get('/my-ticket', [EventController::class, 'ticket'])->name('ticket');
+Route::get('/event/{id}', [App\Http\Controllers\EventController::class, 'show'])->name('event.show');
 
 Route::group(['prefix' => 'admin', 'as' => 'admin.'], function () {
     Route::get('/', [DashboardController::class, 'index'])->name('dashboard');

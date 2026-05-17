@@ -8,7 +8,10 @@
         </div>
         <button
             class="px-6 py-3 bg-slate-900 hover:bg-slate-800 text-white rounded-xl font-semibold shadow-lg transition-all active:scale-95">
-            <a href="{{ route('admin.partners.create') }}" class="btn btn-primary">+ Tambah Partner</a>
+            <a href="{{ route('admin.partners.create') }}"
+               class="px-6 py-3 bg-slate-900 hover:bg-slate-800 text-white rounded-xl font-semibold shadow-lg transition-all active:scale-95 flex items-center">
+               + Tambah Partner
+            </a>
         </button>
     </header>
 
