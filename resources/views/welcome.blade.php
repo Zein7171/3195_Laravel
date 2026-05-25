@@ -48,8 +48,7 @@
             <p class="text-slate-500 font-medium">Jangan sampai ketinggalan acara seru minggu ini!</p>
         </div>
             
-<div class="mb-12 flex flex-wrap gap-3 justify-center items-center">
-            
+        <div class="mb-12 flex flex-wrap gap-3 justify-center items-center">
             <button onclick="window.location.href='{{ url('/#events') }}'" 
                class="px-5 py-2.5 rounded-full text-sm font-semibold border transition-all duration-300 
                {{ !request('category') 
@@ -67,7 +66,6 @@
                     {{ $cat->name }}
                 </button>
             @endforeach
-
         </div>
         
         <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
@@ -75,8 +73,8 @@
                 <div class="group bg-white rounded-3xl border border-slate-100 shadow-sm hover:shadow-2xl transition-all duration-300 overflow-hidden">
                     <div class="relative overflow-hidden aspect-[3/4]">
                        <img src="{{ asset('assets/' . $event->poster_path) }}" 
-     alt="{{ $event->title }}" 
-     class="w-full h-full object-cover group-hover:scale-110 transition-transform duration-500">
+                            alt="{{ $event->title }}" 
+                            class="w-full h-full object-cover group-hover:scale-110 transition-transform duration-500">
                         <div class="absolute top-4 left-4 px-3 py-1 bg-white/90 backdrop-blur rounded-lg text-xs font-bold uppercase text-indigo-600">
                             {{ $event->category->name }}
                         </div>
@@ -106,6 +104,28 @@
                     </div>
                 </div>
             @endforeach
+        </div>
+    </section>
+
+    <section class="max-w-7xl mx-auto px-6 py-16 border-t border-slate-100">
+        <div class="text-center mb-10">
+            <h2 class="text-2xl font-extrabold text-slate-900 mb-2">Mitra Kerja Sama</h2>
+            <p class="text-slate-500 text-sm font-medium">Daftar partner terpercaya yang mendukung platform AmikomEventHub</p>
+        </div>
+
+        <div class="flex flex-wrap items-center justify-center gap-8 md:gap-16">
+            @forelse($partners as $partner)
+                <div class="flex flex-col items-center group">
+                    <img src="{{ $partner->logo_url }}" 
+                         alt="Logo {{ $partner->name }}" 
+                         class="h-14 w-auto object-contain filter grayscale opacity-60 group-hover:grayscale-0 group-hover:opacity-100 transition duration-300">
+                    <span class="text-xs font-bold text-slate-400 group-hover:text-indigo-600 transition mt-2">
+                        {{ $partner->name }}
+                    </span>
+                </div>
+            @empty
+                <p class="text-sm text-slate-400 font-medium">Belum ada partner resmi yang terdaftar.</p>
+            @endforelse
         </div>
     </section>
 @endsection

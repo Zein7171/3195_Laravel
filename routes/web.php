@@ -1,5 +1,6 @@
 <?php
 
+use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\HomeController;
 use App\Http\Controllers\EventController;
 use App\Http\Controllers\Admin\DashboardController;
@@ -8,20 +9,35 @@ use App\Http\Controllers\Admin\TransactionController;
 use App\Http\Controllers\Admin\EventController as AdminEventController;
 use App\Http\Controllers\Admin\PartnerController;
 
-// Pastikan ditaruh di dalam group admin yang sudah ada
-Route::get('/admin/partners/create', [PartnerController::class, 'create'])->name('admin.partners.create');
-Route::post('/admin/partners/store', [PartnerController::class, 'store'])->name('admin.partners.store');
-Route::get('/admin/partners', [PartnerController::class, 'index'])->name('admin.partners.index');
+/*
+|--------------------------------------------------------------------------
+| Web Routes Frontend / Umum
+|--------------------------------------------------------------------------
+*/
 Route::get('/', [HomeController::class, 'index'])->name('home');
-Route::get('/event/1', [EventController::class, 'show'])->name('events.show');
 Route::get('/checkout', [EventController::class, 'checkout'])->name('checkout');
 Route::get('/my-ticket', [EventController::class, 'ticket'])->name('ticket');
-Route::get('/event/{id}', [App\Http\Controllers\EventController::class, 'show'])->name('event.show');
+Route::get('/event/{id}', [EventController::class, 'show'])->name('event.show');
 
+
+/*
+|--------------------------------------------------------------------------
+| Web Routes Admin Panel (CRUD Terpusat di Sini)
+|--------------------------------------------------------------------------
+*/
 Route::group(['prefix' => 'admin', 'as' => 'admin.'], function () {
+    // Dashboard Utama Admin
     Route::get('/', [DashboardController::class, 'index'])->name('dashboard');
+    
+    // CRUD Modul Event
     Route::resource('events', AdminEventController::class);
     
-    Route::get('/categories', [CategoryController::class, 'index'])->name('categories.index');
+    // CRUD Modul Kategori (Soal 1)
+    Route::resource('categories', CategoryController::class)->except(['create', 'edit', 'show']);
+    
+    // CRUD Modul Partner (Soal 2 - Sekarang Mendukung Penuh Create, Read, Update, Delete)
+    Route::resource('partners', PartnerController::class);
+    
+    // Laporan Transaksi
     Route::get('/transactions', [TransactionController::class, 'index'])->name('transactions.index');
 });
