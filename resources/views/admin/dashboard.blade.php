@@ -1,25 +1,35 @@
 @extends('layouts.admin')
 
 @section('content')
-    <!-- Header -->
     <header class="flex justify-between items-center mb-10">
         <div>
             <h1 class="text-3xl font-black">Dashboard Ringkasan</h1>
             <p class="text-slate-500 font-medium">Selamat datang kembali, Admin!</p>
         </div>
-        <div class="flex items-center gap-4">
+        <div class="flex items-center gap-6">
             <div class="text-right hidden md:block">
-                <p class="font-bold">Admin Super</p>
-                <p class="text-xs text-slate-400">Penyelenggara Utama</p>
+                <p class="font-bold text-slate-800">{{ Auth::user()->name }}</p>
+                <p class="text-xs text-indigo-600 font-semibold uppercase tracking-wider">{{ Auth::user()->role }}</p>
             </div>
+            
             <div class="w-12 h-12 bg-white rounded-2xl shadow-sm border flex items-center justify-center p-1">
-                <img src="https://ui-avatars.com/api/?name=Admin+Super&background=6366f1&color=fff"
+                <img src="https://ui-avatars.com/api/?name={{ urlencode(Auth::user()->name) }}&background=6366f1&color=fff"
                     class="rounded-xl">
             </div>
+
+            <form action="{{ route('admin.logout') }}" method="POST" class="inline">
+                @csrf
+                <button type="submit" 
+                    class="px-4 py-2.5 bg-rose-50 hover:bg-rose-100 text-rose-600 rounded-xl font-bold text-sm transition-all duration-200 border border-rose-100 flex items-center gap-2">
+                    <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2.5" d="M17 16l4-4m0 0l-4-4m4 4H7m6 4v1a3 3 0 01-3 3H6a3 3 0 01-3-3V7a3 3 0 013-3h4a3 3 0 013 3v1" />
+                    </svg>
+                    Keluar
+                </button>
+            </form>
         </div>
     </header>
 
-    <!-- Stats Grid -->
     <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6 mb-10">
         <div class="bg-white p-6 rounded-3xl border border-slate-100 shadow-sm">
             <div class="w-12 h-12 bg-indigo-50 text-indigo-600 rounded-2xl flex items-center justify-center mb-4">
@@ -65,7 +75,6 @@
         </div>
     </div>
 
-    <!-- Latest Sales Table -->
     <div class="bg-white rounded-3xl border border-slate-100 shadow-sm overflow-hidden">
         <div class="p-8 border-b flex justify-between items-center">
             <h3 class="font-black text-xl">Transaksi Terakhir</h3>
@@ -89,8 +98,7 @@
                         </td>
                         <td class="px-8 py-6 font-medium text-slate-600">Jazz Night 2024</td>
                         <td class="px-8 py-6">
-                            <span
-                                class="px-3 py-1 bg-green-100 text-green-700 rounded-lg text-xs font-bold uppercase">Success</span>
+                            <span class="px-3 py-1 bg-green-100 text-green-700 rounded-lg text-xs font-bold uppercase">Success</span>
                         </td>
                         <td class="px-8 py-6 font-black text-indigo-600">Rp 155.000</td>
                     </tr>
@@ -101,8 +109,7 @@
                         </td>
                         <td class="px-8 py-6 font-medium text-slate-600">AI & Future Workshop</td>
                         <td class="px-8 py-6">
-                            <span
-                                class="px-3 py-1 bg-orange-100 text-orange-700 rounded-lg text-xs font-bold uppercase">Pending</span>
+                            <span class="px-3 py-1 bg-orange-100 text-orange-700 rounded-lg text-xs font-bold uppercase">Pending</span>
                         </td>
                         <td class="px-8 py-6 font-black text-indigo-600">Rp 55.000</td>
                     </tr>
@@ -113,8 +120,7 @@
                         </td>
                         <td class="px-8 py-6 font-medium text-slate-600">Hackathon 2024</td>
                         <td class="px-8 py-6">
-                            <span
-                                class="px-3 py-1 bg-slate-100 text-slate-600 rounded-lg text-xs font-bold uppercase">Free</span>
+                            <span class="px-3 py-1 bg-slate-100 text-slate-600 rounded-lg text-xs font-bold uppercase">Free</span>
                         </td>
                         <td class="px-8 py-6 font-black text-indigo-600">Rp 0</td>
                     </tr>
